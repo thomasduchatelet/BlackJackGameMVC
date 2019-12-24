@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BlackJackGame.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class BlackJackCard : Card
     {
         #region Properties
+        [JsonProperty]
         public bool FaceUp { get; set; }
         public int Value 
         { 

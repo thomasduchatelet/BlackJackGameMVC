@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BlackJackGame.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Hand
     {
         #region Fields
@@ -11,6 +13,7 @@ namespace BlackJackGame.Models
         #endregion
 
         #region Properties
+        [JsonProperty]
         public IEnumerable<BlackJackCard> Cards { get { return _cards; } }
         public int NrOfCards {
             get { return _cards.Count; } }

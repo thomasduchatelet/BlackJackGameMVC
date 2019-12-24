@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace BlackJackGame.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Deck
     {
         #region Fields
+        [JsonProperty]
         protected IList<BlackJackCard> _cards;
         private Random _random = new Random();
         #endregion
@@ -20,6 +23,12 @@ namespace BlackJackGame.Models
                 foreach (var f in Enum.GetValues(typeof(FaceValue)))
                     _cards.Add(new BlackJackCard((Suit)s, (FaceValue)f));
             Shuffle();
+        }
+
+        [JsonConstructor]
+        private Deck(bool thisIsForJsonOnly)
+        {
+
         }
         #endregion
 

@@ -1,0 +1,53 @@
+﻿@model BlackJackGame.Models.BlackJack
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/css/BJ.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="playGround">
+        <h1>@(Model.GameSummary() == null ? "Next card or Pass" : Model.GameSummary())</h1>
+        <p class="hand">
+            @foreach (var c in Model.DealerHand.Cards)
+            {
+                if (c.FaceUp)
+                {
+                    <img src="~/images/kaart@(c.CardNr).gif"
+                         alt="dealercard"/>
+                }
+                else
+                {
+                    <img src="~/images/kaartback.gif" />
+                }
+            }
+        <span class="total">Dealer total: @Model.DealerHand.Value</span>
+        </p>
+        <p class="hand">
+            @foreach (var c in Model.PlayerHand.Cards)
+            {
+                <img src="~/images/kaart@(c.CardNr).gif" 
+                    alt="playercard"/>
+            }
+        <span class="total">Player total: @Model.PlayerHand.Value</span>
+        </p>
+        <p>
+            @if((int)Model.GameState != 1)
+            {
+                <a asp-controller="Home" asp-action="NextCard">Next Card</a>
+                <a asp-controller="Home" asp-action="Pass">Pass</a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Index">New Game</a>
+            }
+        </p>
+    </div>
+</body>
+</html>
